@@ -4580,7 +4580,11 @@ static inline void keccakf(ulong *a)
   (digest[16] == 0x00) + (digest[17] == 0x00) + (digest[18] == 0x00) + (digest[19] == 0x00) \
 >= TOTAL_ZEROES)
 
-#if LEADING_ZEROES == 6
+#if LEADING_ZEROES == 8
+#define hasLeading(left) ((((uint*)left)[0] | left[4] | left[5] | left[6] | left[7]) == 0)
+#elif LEADING_ZEROES == 7
+#define hasLeading(left) ((((uint*)left)[0] | left[4] | left[5] | left[6]) == 0)
+#elif LEADING_ZEROES == 6
 #define hasLeading(left) ((((uint*)left)[0] | left[4] | left[5]) == 0)
 #elif LEADING_ZEROES == 5
 #define hasLeading(left) ((((uint*)left)[0] | left[4]) == 0)

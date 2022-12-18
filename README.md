@@ -19,4 +19,6 @@ This tool was originally built for use with [`Pr000xy`](https://github.com/0age/
 
 There is also an experimental OpenCL feature that can be used to search for addresses using a GPU. To give it a try, include a fourth parameter specifying the device ID to use, and optionally a fifth and sixth parameter to filter returned results by a threshold based on leading zero bytes and total zero bytes, respectively. By way of example, to perform the same search as above, but using OpenCL device 2 and only returning results that create addresses with at least four leading zeroes or six total zeroes, use `$ cargo run --release $FACTORY $CALLER $INIT_CODE_HASH 2 4 6` (you'll also probably want to try tweaking the `WORK_SIZE` parameter in `src/lib.rs`).
 
+To search only for leading zeroes and ignore total zeroes, set the final argument to a number greater than 20, such as 255. On an RTX 3090 this gives a speedup from ~2100m attempts/sec to ~2150 attempts/sec.
+
 PRs welcome!
